@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: config-client-dev,config-client-test
+  cloud:
+    config:
+      uri: http://localhost:9999
+server:
+  port: 9998

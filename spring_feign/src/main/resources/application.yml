@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: fegin-consumer
+server:
+  port: 9992
+logging:
+  level:
+    root: info
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
