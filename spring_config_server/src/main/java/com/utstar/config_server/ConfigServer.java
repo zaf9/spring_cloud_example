@@ -23,17 +23,20 @@ public class ConfigServer {
 			.getLogger(ConfigServer.class);
 
 	@Autowired
-	private DiscoveryClient client;	
+	private DiscoveryClient client;
 
 	// https://segmentfault.com/a/1190000006138698
+	// --server.port=9995
+	// --server.port=9996
 	public static void main(String[] args) {
-		
+
 		SpringApplication.run(ConfigServer.class, args);
 	}
-	
+
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String test() {
 
+		@SuppressWarnings("deprecation")
 		ServiceInstance instance = client.getLocalServiceInstance();
 		logger.info("/hello, host: {}, service_id: {}", instance.getHost(),
 				instance.getServiceId());

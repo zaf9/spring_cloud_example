@@ -24,6 +24,7 @@
 		<module>spring_eureka</module>
 		<module>spring_feign</module>
 		<module>spring_ribbon</module>
+		<module>spring_hystrix</module>
 	</modules>
 
 	<parent>
