@@ -25,6 +25,9 @@
 		<module>spring_feign</module>
 		<module>spring_ribbon</module>
 		<module>spring_hystrix</module>
+		<module>spring_hystrix_dashboard</module>
+		<module>spring_turbine</module>
+		<module>spring_turbine_amqp</module>
 	</modules>
 
 	<parent>

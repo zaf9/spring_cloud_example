@@ -34,7 +34,9 @@ public class ConfigServer {
 	}
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String test() {
+	public String test() throws InterruptedException {
+		
+//		Thread.sleep(10000);
 
 		@SuppressWarnings("deprecation")
 		ServiceInstance instance = client.getLocalServiceInstance();

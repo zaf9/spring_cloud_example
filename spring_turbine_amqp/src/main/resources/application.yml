@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: turbine-amqp-service
+server:
+  port: 9988
+management:
+  port: 9987
+logging:
+  level:
+    root: info
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
+turbine:
+  app-config: hystrix-consumer,hystrix-consumer-2
+  combine-host-port: true
+  aggregator:
+    clusterConfig: MAIN
+  clusterNameExpression: metadata['cluster']

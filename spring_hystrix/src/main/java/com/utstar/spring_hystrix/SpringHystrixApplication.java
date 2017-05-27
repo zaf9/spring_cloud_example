@@ -1,14 +1,11 @@
 package com.utstar.spring_hystrix;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableCircuitBreaker
 @RestController
 public class SpringHystrixApplication {
 
@@ -32,33 +30,17 @@ public class SpringHystrixApplication {
 	}
 
 	@Autowired
-	DiscoveryClient discoveryClient;
-
-	@Autowired
-	RestTemplate restTemplate;
+	ConfigServerService csservice;
 
 	@RequestMapping(value = "/consumer", method = RequestMethod.GET)
 	public String consumer() {
 
-		List<String> serviceList = discoveryClient.getServices();
-		for (String serviceId : serviceList) {
-			List<ServiceInstance> instanceList = discoveryClient
-					.getInstances(serviceId);
-			for (ServiceInstance instance : instanceList) {
-				logger.info("consumer serviceId: {} host: {} port: {} uri: {}",
-						serviceId, instance.getHost(), instance.getPort(),
-						instance.getUri());
-			}
+		logger.info("consumer -> csservice.hello( )");
 
-		}
-
-		logger.info("ribbon consumer!!! restTemplate: {}",
-				restTemplate.getClass());
-
-		return restTemplate.getForObject("http://config-server/hello",
-				String.class);
+		return csservice.hello();
 	}
 
+	//--server.port=9994 --spring.application.name=hystrix-consumer-2
 	public static void main(String[] args) {
 		SpringApplication.run(SpringHystrixApplication.class, args);
 	}

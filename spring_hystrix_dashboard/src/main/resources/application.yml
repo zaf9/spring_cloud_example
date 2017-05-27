@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: hystrix-dashboard
+server:
+  port: 9989
+logging:
+  level:
+    root: info
