@@ -1,6 +1,11 @@
 spring:
   application:
     name: hystrix-consumer
+  rabbitmq:
+    host: 10.48.114.26
+    port: 5672
+    username: springcloud
+    password: rss123
 server:
   port: 9990
 logging:

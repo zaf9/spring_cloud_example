@@ -1,0 +1,42 @@
+server:
+  port: 10003
+
+logging:
+  level:
+    root: info
+
+management:
+  security:
+    enabled: false
+    
+spring:
+  application:
+    name: stream-sender-server
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: configfile2
+        input:
+          destination: configfile
+        configChannelOutput:
+          destination: configfile4
+          producer:
+            partitionKeyExpression: payload
+            partitionCount: 2
+        configChannelInput:
+          destination: configfile3
+  rabbitmq:
+    host: 10.48.114.26
+    port: 5672
+    username: springcloud
+    password: rss123
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}
+    

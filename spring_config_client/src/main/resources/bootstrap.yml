@@ -1,8 +1,42 @@
 spring:
   application:
-    name: config-client-dev,config-client-test
+#    name: config-client-dev,config-client-master,config-client-test
+    name: config-client-dev
   cloud:
     config:
-      uri: http://localhost:9999
+      discovery:
+        enabled: true
+        serviceId: config-server
+      label: develop
+#      uri: http://localhost:9995
+      failFast: true
+    bus:
+      trace:
+        enabled: true    
+    #spring cloud bus kafka
+    stream:
+      kafka:
+        binder:
+          brokers: 10.48.114.12:9092,10.48.114.10:9092,10.48.114.31:9092
+          zkNodes: 10.48.114.12:2181,10.48.114.10:2181,10.48.114.31:2181
+#  #spring cloud bus rabbitmq
+#  rabbitmq:
+#    host: 10.48.114.26
+#    port: 5672
+#    username: springcloud
+#    password: rss123
+
+management:
+  security:
+    enabled: false
+    
 server:
-  port: 9998
+  port: 9999
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/

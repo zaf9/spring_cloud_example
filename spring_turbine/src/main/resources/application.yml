@@ -13,7 +13,7 @@ eureka:
     serviceUrl:
       defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
 turbine:
-  app-config: hystrix-consumer,hystrix-consumer-2
+  app-config: hystrix-consumer
   combine-host-port: true
   aggregator:
     clusterConfig: MAIN

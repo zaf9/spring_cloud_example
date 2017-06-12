@@ -13,3 +13,27 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
+ribbon:
+  ConnectTimeout: 500
+  ReadTimeout: 1000
+CONFIG-SERVER:
+  ribbon:
+    ConnectTimeout: 500
+    ReadTimeout: 2000
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 2
+    MaxAutoRetries: 1
+#https://github.com/spring-cloud/spring-cloud-netflix/issues/1277
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+            interruptOnTimeout: true  

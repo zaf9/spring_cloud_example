@@ -1,0 +1,44 @@
+server:
+  port: 10002
+
+logging:
+  level:
+    root: info
+
+management:
+  security:
+    enabled: false
+    
+spring:
+  application:
+    name: stream-receiver-server
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: configfile
+        input:
+          destination: configfile2
+        configChannelOutput:
+          destination: configfile3
+        configChannelInput:
+          group: configfile4-group
+          destination: configfile4
+          consumer:
+            partitioned: true
+      instanceCount: 2
+      instanceIndex: 0
+  rabbitmq:
+    host: 10.48.114.26
+    port: 5672
+    username: springcloud
+    password: rss123
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}
+    

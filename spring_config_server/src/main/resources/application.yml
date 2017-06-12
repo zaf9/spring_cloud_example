@@ -1,6 +1,10 @@
 server:
   port: 9999
 
+logging:
+  level:
+    root: info
+
 management:
   security:
     enabled: false
@@ -12,8 +16,24 @@ spring:
         git:
           uri: git@10.48.114.26:cdn/config_server.git
           searchPaths: dsi_java
+    bus:
+      trace:
+        enabled: true
+    #spring cloud bus kafka
+    stream:
+      kafka:
+        binder:
+          brokers: 10.48.114.12:9092,10.48.114.10:9092,10.48.114.31:9092
+          zkNodes: 10.48.114.12:2181,10.48.114.10:2181,10.48.114.31:2181
   application:
     name: config-server
+#  #spring cloud bus rabbitmq
+#  rabbitmq:
+#    host: 10.48.114.26
+#    port: 5672
+#    username: springcloud
+#    password: rss123
+
 eureka:
   client:
     serviceUrl:

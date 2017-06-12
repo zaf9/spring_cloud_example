@@ -1,0 +1,35 @@
+server:
+  port: 10001
+
+logging:
+  level:
+    root: info
+
+management:
+  security:
+    enabled: false
+    
+spring:
+  application:
+    name: stream-server
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: configfile
+        input:
+          destination: configfile
+  rabbitmq:
+    host: 10.48.114.26
+    port: 5672
+    username: springcloud
+    password: rss123
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}
+    

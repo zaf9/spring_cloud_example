@@ -1,6 +1,11 @@
 spring:
   application:
     name: turbine-amqp-service
+  rabbitmq:
+    host: 10.48.114.26
+    port: 5672
+    username: springcloud
+    password: rss123
 server:
   port: 9988
 management:
@@ -13,7 +18,7 @@ eureka:
     serviceUrl:
       defaultZone: http://127.0.0.1:9998/eureka/,http://127.0.0.1:9997/eureka/
 turbine:
-  app-config: hystrix-consumer,hystrix-consumer-2
+  app-config: hystrix-consumer
   combine-host-port: true
   aggregator:
     clusterConfig: MAIN

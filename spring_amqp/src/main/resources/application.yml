@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: spring-amqp-service
+  rabbitmq:
+    host: 10.48.114.26
+    port: 5672
+    username: springcloud
+    password: rss123
